@@ -35,7 +35,6 @@ public class Army {
             if (squadId == squadFound.getSquadId()) {
                 return squadFound;
             }
-
         }
         throw new SquadNotFoundException("No squad found with that ID.");
 
