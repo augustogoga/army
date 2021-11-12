@@ -30,7 +30,8 @@ public class Squad {
     public int getSquadId() {
         return squadId;
     }
-    private int getSquadPower(){
+
+    public int getSquadPower(){
         int soldierPower = 0;
         int vehiclesPower = 0;
         for (Soldier soldier : this.soldiers) {

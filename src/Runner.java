@@ -6,7 +6,7 @@ import Vehicle.WarPlane;
 
 public class Runner {
     public static void main(String[] args) {
-        Army army1 = new Army("Armada", 20);
+        Army army1 = new Army("Armada", 1);
 
         army1.addSquad("Squad1", 45);
 
@@ -27,13 +27,36 @@ public class Runner {
         }
 
 
-
         System.out.println(army1.getSquad(45));
 
         WarPlane warplane = new WarPlane("1234", "F-77");
         army1.getSquads().get(0).addVehicle(warplane);
 //
         System.out.println(army1);
+
+        Army army2 = new Army("Armada2", 1);
+
+        army2.addSquad("Squad1", 202);
+
+        Colonel colonel2 = new Colonel("Colonel Brubank", 1);
+        army2.getSquads().get(0).addSoldier(colonel2);
+
+        for (int i = 0; i < 2; i++){
+            General general2 = new General("General", i);
+            army2.getSquads().get(0).addSoldier(general2);
+        }
+
+        for (int i = 0; i < 10; i++){
+            Private private2 = new Private("Private", i);
+            army2.getSquads().get(0).addSoldier(private2);
+        }
+
+        System.out.println(army2);
+
+        army1.fight(army1, army2);
+
+        colonel1.cover();
+
 
 
 //        warplane.takeOff();

@@ -4,14 +4,24 @@ public abstract class Vehicle {
     private String plate;
     private String vehicleName;
     private boolean moving = false;
+    private int ammo;
 
     private int powerLevel;
 
-    public Vehicle(String plate, String vehicleName, int powerLevel){
+    public Vehicle(String plate, String vehicleName, int powerLevel, int ammo){
         this.plate = plate;
         this.vehicleName = vehicleName;
         this.moving = isMoving();
         this.powerLevel = powerLevel;
+        this.ammo = ammo;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
     }
 
     public int getPowerLevel() {

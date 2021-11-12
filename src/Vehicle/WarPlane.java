@@ -3,7 +3,7 @@ package Vehicle;
 public class WarPlane extends Vehicle {
 
     public WarPlane(String plate, String vehicleName) {
-        super(plate, vehicleName, 40);
+        super(plate, vehicleName, 40, 10);
     }
 
 

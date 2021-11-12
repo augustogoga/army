@@ -11,10 +11,10 @@ public class Army {
     public Army(String name, int squadAmount) {
         this.name = name;
         this.squadAmount = squadAmount;
-        this.squads = new ArrayList<Squad>();
+        this.squads = new ArrayList<>();
     }
 
-    public Army(String name, int squadAmount, ArrayList<Squad> squads){
+    public Army(String name, int squadAmount, ArrayList<Squad> squads) {
         this.name = name;
         this.squadAmount = squadAmount;
         this.squads = squads;
@@ -24,19 +24,27 @@ public class Army {
         return squads;
     }
 
-    public void addSquad(String squadName, int squadId){
+    public void addSquad(String squadName, int squadId) {
         squads.add(new Squad(squadName, squadId));
     }
 
-    public Squad getSquad(int squadId){
+    public Squad getSquad(int squadId) {
         for (Squad squadFound : squads) {
-            if (squadId == squadFound.getSquadId()){
+            if (squadId == squadFound.getSquadId()) {
                 return squadFound;
             }
 
         }
         return null;
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -46,4 +54,16 @@ public class Army {
                 ", SQUAD SIZE= " + squadAmount + '\'' +
                 ", SQUADS= " + squads;
     }
+
+    public void fight(Army army1, Army army2) {
+        int power1 = army1.getSquads().get(0).getSquadPower();
+        int power2 = army2.getSquads().get(0).getSquadPower();
+        String message = "The army " + army2.getName() + " has won the fight!";
+
+        if (power1 >= power2){
+            message = "The army " + army1.getName() + " has won the fight!";
+        }
+        System.out.println(message);
+    }
+
 }

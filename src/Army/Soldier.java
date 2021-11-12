@@ -1,21 +1,79 @@
 package Army;
 
-public abstract class Soldier {
+import Interfaces.*;
+
+public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand, IAdvance {
     private String name;
     private int soldierId;
     private String rank;
     private int powerLevel;
+    private int ammo;
 
     public Soldier() {
 
     }
 
-    public Soldier(String name, int soldierId, String rank, int powerLevel) {
+    public Soldier(String name, int soldierId, String rank, int powerLevel, int ammo) {
         this.name = name;
         this.soldierId = soldierId;
         this.rank = rank;
         this.powerLevel = powerLevel;
+        this.ammo = ammo;
 
+    }
+
+    @Override
+    public void retire(Soldier soldier) {
+        System.out.println(soldier.getName() + " retires.");
+    }
+
+    @Override
+    public void train(Soldier soldier) {
+        int updatedPL = soldier.getPowerLevel();
+        soldier.setPowerLevel(updatedPL + 10);
+    }
+
+    @Override
+    public void advance() {
+        System.out.println(getName() + " advances to the next position.");
+    }
+
+    @Override
+    public void cover() {
+        System.out.println("The soldier " + getName() + ", with the ID " + soldierId + " is getting to cover.");
+    }
+
+    @Override
+    public void shoot() {
+        int i = 0;
+        int ammo = getAmmo();
+        while (i < getAmmo()) {
+            ammo--;
+            setAmmo(ammo);
+        }
+    }
+
+    public void reload() {
+        ammo = getAmmo();
+        if (ammo == 30) {
+            System.out.println("You can't reload when you're full.");
+        } else {
+            setAmmo(30);
+        }
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        if (this.ammo > 30) {
+            this.ammo = 30;
+        } else if (this.ammo < 0) {
+            this.ammo = 0;
+        } else {
+            this.ammo = ammo;
+        }
     }
 
     public String getName() {

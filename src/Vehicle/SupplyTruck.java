@@ -9,7 +9,7 @@ public class SupplyTruck extends Vehicle {
     private List<Supply> supplies;
 
     public SupplyTruck(String plate, String vehicleName) {
-        super(plate, vehicleName, 5);
+        super(plate, vehicleName, 5, 0);
         this.supplies = new ArrayList<>();
 
     }
