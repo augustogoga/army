@@ -1,5 +1,7 @@
 package Army;
 
+import Exceptions.SquadNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +30,14 @@ public class Army {
         squads.add(new Squad(squadName, squadId));
     }
 
-    public Squad getSquad(int squadId) {
+    public Squad getSquad(int squadId) throws SquadNotFoundException {
         for (Squad squadFound : squads) {
             if (squadId == squadFound.getSquadId()) {
                 return squadFound;
             }
 
         }
-        return null;
+        throw new SquadNotFoundException("No squad found with that ID.");
 
     }
 

@@ -2,6 +2,7 @@ import Army.Army;
 import Army.General;
 import Army.Colonel;
 import Army.Private;
+import Exceptions.SquadNotFoundException;
 import Vehicle.WarPlane;
 
 public class Runner {
@@ -27,7 +28,12 @@ public class Runner {
         }
 
 
-        System.out.println(army1.getSquad(45));
+        try {
+            System.out.println(army1.getSquad(45));
+            System.out.println(army1.getSquad(40));
+        } catch (SquadNotFoundException e) {
+            System.out.println(e);
+        }
 
         WarPlane warplane = new WarPlane("1234", "F-77");
         army1.getSquads().get(0).addVehicle(warplane);

@@ -2,6 +2,8 @@ package Army;
 
 import Interfaces.*;
 
+import java.util.Objects;
+
 public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand, IAdvance {
     private String name;
     private int soldierId;
@@ -115,5 +117,18 @@ public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand,
                 ", soldierId=" + soldierId +
                 ", rank='" + rank + '\'' + ", powerLevel= " + powerLevel +
                 "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Soldier soldier = (Soldier) o;
+        return soldierId == soldier.soldierId && powerLevel == soldier.powerLevel && ammo == soldier.ammo && Objects.equals(name, soldier.name) && Objects.equals(rank, soldier.rank);
+    }
+
+    @Override
+    public int hashCode() {
+        return soldierId;
     }
 }
