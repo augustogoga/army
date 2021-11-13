@@ -1,6 +1,8 @@
 package Army;
 
 import Exceptions.SquadNotFoundException;
+import Exceptions.VehicleNotFoundException;
+import Vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +33,30 @@ public class Army {
     }
 
     public Squad getSquad(int squadId) throws SquadNotFoundException {
-        for (Squad squadFound : squads) {
-            if (squadId == squadFound.getSquadId()) {
+        int i = 0;
+        Squad squadFound = null;
+        while (i < squads.size()) {
+            if (squads.get(i).getSquadId() == squadId) {
+                squadFound = squads.get(i);
                 return squadFound;
             }
+            i++;
         }
-        throw new SquadNotFoundException("No squad found with that ID.");
 
+        throw new SquadNotFoundException("No squad found with that ID.");
+    }
+
+    public Vehicle getVehicle(String plate) throws VehicleNotFoundException {
+        int i = 0;
+        Vehicle vehicleFound = null;
+        while (i < squads.get(i).getVehicles(i).size()) {
+            if (squads.get(i).getVehicles(i).get(i).getPlate().equals(plate)) {
+                vehicleFound = squads.get(i).getVehicles(i).get(i);
+                return vehicleFound;
+            }
+            i++;
+        }
+        throw new VehicleNotFoundException("No vehicle found with that plate.");
     }
 
     public String getName() {
@@ -61,7 +80,7 @@ public class Army {
         int power2 = army2.getSquads().get(0).getSquadPower();
         String message = "The army " + army2.getName() + " has won the fight!";
 
-        if (power1 >= power2){
+        if (power1 >= power2) {
             message = "The army " + army1.getName() + " has won the fight!";
         }
         System.out.println(message);

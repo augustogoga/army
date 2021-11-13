@@ -1,5 +1,6 @@
 package Army;
 
+import Exceptions.SoldierNotFoundException;
 import Interfaces.*;
 
 import java.util.Objects;
@@ -63,6 +64,7 @@ public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand,
             setAmmo(30);
         }
     }
+
 
     public int getAmmo() {
         return ammo;
