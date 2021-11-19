@@ -1,0 +1,92 @@
+package com.solvd.army.model.vehicle;
+
+import com.solvd.army.model.interfaces.IReload;
+import com.solvd.army.model.interfaces.IShoot;
+
+public abstract class Vehicle implements IShoot, IReload {
+    private String plate;
+    private String vehicleName;
+    private boolean isMoving = false;
+    private int ammo;
+
+    private int powerLevel;
+
+    public Vehicle(String plate, String vehicleName, int powerLevel, int ammo) {
+        this.plate = plate;
+        this.vehicleName = vehicleName;
+        this.isMoving = isMoving();
+        this.powerLevel = powerLevel;
+        this.ammo = ammo;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        if (this.ammo > 30) {
+            this.ammo = 30;
+        } else if (this.ammo < 0) {
+            this.ammo = 0;
+        } else {
+            this.ammo = ammo;
+        }
+    }
+
+    public void shoot() {
+        int i = 0;
+        int ammo = getAmmo();
+        while (i < getAmmo()) {
+            ammo--;
+            setAmmo(ammo);
+        }
+    }
+
+    public void reload() {
+        ammo = getAmmo();
+        if (ammo == 10) {
+            System.out.println("This vehicle already has ammo.");
+        } else {
+            setAmmo(10);
+        }
+    }
+
+    public int getPowerLevel() {
+        return powerLevel;
+    }
+
+    public void setPowerLevel(int powerLevel) {
+        this.powerLevel = powerLevel;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
+    }
+
+    public String getVehicleName() {
+        return vehicleName;
+    }
+
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.isMoving = moving;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle: " +
+                "plate='" + plate + '\'' +
+                ", vehicleName='" + vehicleName + '\'' + ", powerLevel= " + powerLevel;
+    }
+}

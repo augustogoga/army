@@ -1,11 +1,10 @@
-import Army.Army;
-import Army.General;
-import Army.Colonel;
-import Army.Private;
-import Exceptions.SoldierNotFoundException;
-import Exceptions.SquadNotFoundException;
-import Exceptions.VehicleNotFoundException;
-import Vehicle.WarPlane;
+package com.solvd.army.util;
+
+import com.solvd.army.model.army.Army;
+import com.solvd.army.model.army.*;
+import com.solvd.army.model.exceptions.*;
+import com.solvd.army.model.generics.MyGenericClass;
+import com.solvd.army.model.vehicle.*;
 
 public class Runner {
     public static void main(String[] args) {
@@ -48,7 +47,7 @@ public class Runner {
         try {
             System.out.println(army1.getVehicle("1234"));
             System.out.println(army1.getVehicle("1235"));
-        } catch (VehicleNotFoundException messageVehicle){
+        } catch (VehicleNotFoundException messageVehicle) {
             System.out.println(messageVehicle);
         }
         army1.getSquads().get(0).addVehicle(warplane);
@@ -77,19 +76,10 @@ public class Runner {
         army1.fight(army1, army2);
 
         colonel1.cover();
+        colonel1.reload();
 
-
-//        warplane.takeOff();
-//        warplane.takeOff();
-//        warplane.land();
-//        warplane.land();
-
-//        SupplyTruck supplytruck = new SupplyTruck("1111", "Supply Truck");
-//        supplytruck.addSupply(new Drink("Cola", 444, true));
-//        supplytruck.addSupply(new Food("Bread", 1234, false));
-//        supplytruck.addSupply(new Food("Yogurt", 1221, false));
-//        supplytruck.addSupply(new Ammunition("Ammo", 1234));
-//        supplytruck.showSupplyList();
+        MyGenericClass<Vehicle> soldierMyGenericClass = new MyGenericClass<>();
+        soldierMyGenericClass.takeEntity(warplane);
 
     }
 
