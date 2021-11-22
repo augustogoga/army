@@ -1,4 +1,4 @@
-package com.solvd.army.model.vehicle;
+package com.solvd.army.model.machinery;
 
 public class Tank extends Vehicle {
     private boolean loaded;
@@ -13,8 +13,6 @@ public class Tank extends Vehicle {
 
     public Tank(String plate, String vehicleName) {
         super(plate, vehicleName, 50, 10);
-
-
     }
 
     @Override

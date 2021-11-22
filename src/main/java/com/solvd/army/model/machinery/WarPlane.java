@@ -1,6 +1,9 @@
-package com.solvd.army.model.vehicle;
+package com.solvd.army.model.machinery;
+
+import java.util.logging.Logger;
 
 public class WarPlane extends Vehicle {
+    public static final Logger LOGGER = Logger.getLogger(WarPlane.class.getName());
     private boolean isFlying;
     private boolean loaded;
 
@@ -28,10 +31,10 @@ public class WarPlane extends Vehicle {
 
     public void takeOff() {
         if (!isMoving()) {
-            System.out.println("The plane " + getVehicleName() + " has taken off!");
+            LOGGER.info("The plane " + getVehicleName() + " has taken off!");
             setMoving(true);
         } else {
-            System.out.println("The plane " + getVehicleName() + " is already flying!");
+            LOGGER.warning("The plane " + getVehicleName() + " is already flying!");
         }
 
     }
@@ -39,9 +42,9 @@ public class WarPlane extends Vehicle {
     public void land() {
         if (isMoving()) {
             setMoving(false);
-            System.out.println("The plane " + getVehicleName() + " has landed");
+            LOGGER.info("The plane " + getVehicleName() + " has landed");
         } else {
-            System.out.println("The plane " + getVehicleName() + " isn't flying.");
+            LOGGER.warning("The plane " + getVehicleName() + " isn't flying.");
         }
     }
 

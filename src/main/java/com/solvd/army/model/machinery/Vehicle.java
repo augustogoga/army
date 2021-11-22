@@ -1,9 +1,12 @@
-package com.solvd.army.model.vehicle;
+package com.solvd.army.model.machinery;
 
 import com.solvd.army.model.interfaces.IReload;
 import com.solvd.army.model.interfaces.IShoot;
 
+import java.util.logging.Logger;
+
 public abstract class Vehicle implements IShoot, IReload {
+    public static final Logger LOGGER = Logger.getLogger(Vehicle.class.getName());
     private String plate;
     private String vehicleName;
     private boolean isMoving = false;
@@ -45,7 +48,7 @@ public abstract class Vehicle implements IShoot, IReload {
     public void reload() {
         ammo = getAmmo();
         if (ammo == 10) {
-            System.out.println("This vehicle already has ammo.");
+            LOGGER.info("This vehicle already has ammo.");
         } else {
             setAmmo(10);
         }

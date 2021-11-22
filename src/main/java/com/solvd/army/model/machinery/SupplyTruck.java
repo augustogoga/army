@@ -1,6 +1,6 @@
-package com.solvd.army.model.vehicle;
+package com.solvd.army.model.machinery;
 
-import com.solvd.army.model.supply.Supply;
+import com.solvd.army.model.stock.Supply;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,14 @@ public class SupplyTruck extends Vehicle {
 
     public void showSupplyList() {
         for (Supply supply : supplies) {
-            System.out.println(supply);
+            LOGGER.info(String.valueOf(supply));
         }
     }
 
+    @Override
+    public String toString() {
+        return "SupplyTruck{" +
+                "supplies=" + supplies +
+                '}';
+    }
 }

@@ -1,6 +1,6 @@
 package com.solvd.army.model.interfaces;
+import com.solvd.army.model.armedForce.Soldier;
 
-import com.solvd.army.model.army.Soldier;
 
 public interface ICommand {
     public void retire(Soldier soldier);

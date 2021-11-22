@@ -1,13 +1,15 @@
-package com.solvd.army.model.army;
+package com.solvd.army.model.armedForce;
 
-import com.solvd.army.model.vehicle.Vehicle;
+import com.solvd.army.model.machinery.Vehicle;
 import com.solvd.army.model.exceptions.SquadNotFoundException;
 import com.solvd.army.model.exceptions.VehicleNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Army {
+    public static final Logger LOGGER = Logger.getLogger(Army.class.getName());
     private String name;
     private int squadAmount;
     private List<Squad> squads;
@@ -83,7 +85,7 @@ public class Army {
         if (power1 >= power2) {
             message = "The army " + army1.getName() + " has won the fight!";
         }
-        System.out.println(message);
+        LOGGER.info(message);
     }
 
 }

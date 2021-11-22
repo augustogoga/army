@@ -1,4 +1,4 @@
-package com.solvd.army.model.supply;
+package com.solvd.army.model.stock;
 
 public abstract class Supply {
     private String productName;

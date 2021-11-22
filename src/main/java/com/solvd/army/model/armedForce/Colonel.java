@@ -1,13 +1,17 @@
-package com.solvd.army.model.army;
+package com.solvd.army.model.armedForce;
 
-public class Private extends Soldier {
+import java.util.logging.Logger;
+
+public class Colonel extends Soldier {
+    public static final Logger LOGGER = Logger.getLogger(Colonel.class.getName());
     private String weapon;
     private int accessLevel;
     private boolean readyToShoot;
 
-    public Private(String name, int soldierId) {
-        super(name, soldierId, "Private", 10, 30);
+    public Colonel(String name, int soldierId) {
+        super(name, soldierId, "Colonel", 50, 30);
     }
+
 
     public String getWeapon() {
         return weapon;
@@ -44,12 +48,11 @@ public class Private extends Soldier {
 
     @Override
     public void aim(Soldier soldier) {
-        if (isReadyToShoot()){
-            System.out.println(soldier.getName() + " is prepared and ready for shooting.");
+        if (isReadyToShoot()) {
+            LOGGER.info(soldier.getName() + " is prepared and ready for shooting.");
         } else {
-            System.out.println(soldier.getName() + " must have a charged weapon to be ready to shoot.");
+            LOGGER.info(soldier.getName() + " must have a charged weapon to be ready to shoot.");
         }
-
-
     }
+
 }

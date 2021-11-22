@@ -1,6 +1,6 @@
-package com.solvd.army.model.army;
+package com.solvd.army.model.armedForce;
 
-import com.solvd.army.model.vehicle.Vehicle;
+import com.solvd.army.model.machinery.Vehicle;
 import com.solvd.army.model.exceptions.SoldierNotFoundException;
 
 import java.util.ArrayList;
@@ -71,7 +71,6 @@ public class Squad {
         for (Vehicle vehicle : this.vehicles) {
             vehiclesPower += vehicle.getPowerLevel();
         }
-
 
         return vehiclesPower + soldierPower;
     }

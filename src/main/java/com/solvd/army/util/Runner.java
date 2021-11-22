@@ -1,18 +1,22 @@
 package com.solvd.army.util;
 
-import com.solvd.army.model.army.Army;
-import com.solvd.army.model.army.*;
+import com.solvd.army.model.armedForce.Army;
+import com.solvd.army.model.armedForce.*;
 import com.solvd.army.model.exceptions.*;
 import com.solvd.army.model.generics.MyGenericClass;
-import com.solvd.army.model.vehicle.*;
+import com.solvd.army.model.machinery.*;
+
+import java.util.logging.Logger;
 
 public class Runner {
+    public static final Logger LOGGER = Logger.getLogger(Runner.class.getName());
+
     public static void main(String[] args) {
         Army army1 = new Army("Armada", 1);
 
         army1.addSquad("Squad1", 45);
 
-        System.out.println(army1);
+        LOGGER.info(String.valueOf(army1));
 
 
         Colonel colonel1 = new Colonel("Colonel Sanders", 20);
@@ -30,29 +34,45 @@ public class Runner {
 
 
         try {
-            System.out.println(army1.getSquad(45));
-            System.out.println(army1.getSquad(40));
+            LOGGER.info(String.valueOf(army1.getSquad(45)));
+            LOGGER.info(String.valueOf(army1.getSquad(40)));
         } catch (SquadNotFoundException messageSquad) {
-            System.out.println(messageSquad);
+            LOGGER.info(String.valueOf(messageSquad));
         }
 
         try {
-            System.out.println(army1.getSquad(45).getSoldier(999));
+            LOGGER.info(String.valueOf(army1.getSquad(45).getSoldier(999)));
         } catch (SoldierNotFoundException | SquadNotFoundException message) {
-            System.out.println(message);
+            LOGGER.info(String.valueOf(message));
         }
 
         WarPlane warplane = new WarPlane("1234", "F-77");
 
         try {
-            System.out.println(army1.getVehicle("1234"));
-            System.out.println(army1.getVehicle("1235"));
+            LOGGER.info(String.valueOf(army1.getVehicle("1234")));
+            LOGGER.info(String.valueOf(army1.getVehicle("1235")));
         } catch (VehicleNotFoundException messageVehicle) {
-            System.out.println(messageVehicle);
+            LOGGER.info(String.valueOf(messageVehicle));
+        }
+        try {
+            colonel1.reload();
+            colonel1.reload();
+        } catch (SoldierFullAmmoException messageFullAmmo) {
+            LOGGER.info(String.valueOf(messageFullAmmo));
+        }
+
+        MyGenericClass<Vehicle> soldierMyGenericClass = new MyGenericClass<>();
+        soldierMyGenericClass.takeEntity(warplane);
+
+        try {
+            colonel1.shoot();
+            colonel1.shoot();
+        } catch (SoldierOutOfAmmoException messageOutOfAmmo) {
+            LOGGER.info(String.valueOf(messageOutOfAmmo));
         }
         army1.getSquads().get(0).addVehicle(warplane);
 
-        System.out.println(army1);
+        LOGGER.info(String.valueOf(army1));
 
         Army army2 = new Army("Armada2", 1);
 
@@ -71,16 +91,11 @@ public class Runner {
             army2.getSquads().get(0).addSoldier(private2);
         }
 
-        System.out.println(army2);
+        LOGGER.info(String.valueOf(army2));
 
         army1.fight(army1, army2);
 
         colonel1.cover();
-        colonel1.reload();
-
-        MyGenericClass<Vehicle> soldierMyGenericClass = new MyGenericClass<>();
-        soldierMyGenericClass.takeEntity(warplane);
-
     }
 
 }

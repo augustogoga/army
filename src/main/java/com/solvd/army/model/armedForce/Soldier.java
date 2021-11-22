@@ -1,9 +1,13 @@
-package com.solvd.army.model.army;
+package com.solvd.army.model.armedForce;
 
+import com.solvd.army.model.exceptions.SoldierFullAmmoException;
+import com.solvd.army.model.exceptions.SoldierOutOfAmmoException;
 import com.solvd.army.model.interfaces.*;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand, IAdvance {
+    public static final Logger LOGGER = Logger.getLogger(Soldier.class.getName());
     private String name;
     private int soldierId;
     private String rank;
@@ -25,7 +29,7 @@ public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand,
 
     @Override
     public void retire(Soldier soldier) {
-        System.out.println(soldier.getName() + " retires.");
+        LOGGER.info(soldier.getName() + " retires.");
     }
 
     @Override
@@ -36,27 +40,28 @@ public abstract class Soldier implements IShoot, IReload, IGetToCover, ICommand,
 
     @Override
     public void advance() {
-        System.out.println(getName() + " advances to the next position.");
+        LOGGER.info(getName() + " advances to the next position.");
     }
 
     @Override
     public void cover() {
-        System.out.println("The soldier " + getName() + ", with the ID " + soldierId + " is getting to cover.");
+        LOGGER.info("The soldier " + getName() + ", with the ID " + soldierId + " is getting to cover.");
     }
 
-    public void shoot() {
+    public void shoot() throws SoldierOutOfAmmoException {
         int i = 0;
         int ammo = getAmmo();
         while (i < getAmmo()) {
             ammo--;
             setAmmo(ammo);
         }
+        throw new SoldierOutOfAmmoException("You can't shoot if you're out of ammo");
     }
 
-    public void reload() {
+    public void reload() throws SoldierFullAmmoException {
         ammo = getAmmo();
         if (ammo == 30) {
-            System.out.println("You can't reload when you're full.");
+           throw new SoldierFullAmmoException("You can't reload when you're full on ammunition");
         } else {
             setAmmo(30);
         }

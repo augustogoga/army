@@ -1,4 +1,4 @@
-package com.solvd.army.model.vehicle;
+package com.solvd.army.model.machinery;
 
 public class Car extends Vehicle {
 
