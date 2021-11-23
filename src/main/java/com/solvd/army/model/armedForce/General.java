@@ -1,32 +1,24 @@
 package com.solvd.army.model.armedForce;
 
-import java.util.logging.Logger;
+import java.util.Objects;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class General extends Soldier {
-    public static final Logger LOGGER = Logger.getLogger(General.class.getName());
-    private String weapon;
-    private int accessLevel;
+    private static final Logger LOGGER = LogManager.getLogger(General.class.getName());
+    private static final int accessLevel = 10;
     private boolean readyToShoot;
 
     public General(String name, int soldierId) {
         super(name, soldierId, "General", 25, 30);
     }
 
-    public String getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(String weapon) {
-        this.weapon = weapon;
-    }
 
     public int getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(int accessLevel) {
-        this.accessLevel = accessLevel;
-    }
 
     public boolean isReadyToShoot() {
         readyToShoot = getAmmo() == 30;
@@ -39,8 +31,7 @@ public class General extends Soldier {
 
     @Override
     public String toString() {
-        return super.toString() + "Private{" +
-                "weapon='" + weapon + '\'' +
+        return super.toString() + "Private{" + '\'' +
                 ", accessLevel=" + accessLevel +
                 ", readyToShoot=" + readyToShoot +
                 '}';
@@ -55,5 +46,17 @@ public class General extends Soldier {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof General)) return false;
+        if (!super.equals(o)) return false;
+        General general = (General) o;
+        return accessLevel == general.accessLevel && readyToShoot == general.readyToShoot;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), accessLevel, readyToShoot);
+    }
 }

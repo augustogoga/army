@@ -16,7 +16,6 @@ public abstract class Supply {
 
     }
 
-
     public int getProductId() {
         return productId;
     }

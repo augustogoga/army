@@ -1,12 +1,13 @@
 package com.solvd.army.model.generics;
 
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MyGenericClass<U> {
-    public static final Logger LOGGER = Logger.getLogger(MyGenericClass.class.getName());
+    public static final Logger LOGGER = LogManager.getLogger(MyGenericClass.class);
 
     public void takeEntity(U u) {
-        LOGGER.info(String.valueOf(u));
+        LOGGER.info(u);
     }
 
 }

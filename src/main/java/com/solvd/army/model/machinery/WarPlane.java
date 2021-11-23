@@ -1,9 +1,10 @@
 package com.solvd.army.model.machinery;
 
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class WarPlane extends Vehicle {
-    public static final Logger LOGGER = Logger.getLogger(WarPlane.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(WarPlane.class.getName());
     private boolean isFlying;
     private boolean loaded;
 
@@ -34,7 +35,7 @@ public class WarPlane extends Vehicle {
             LOGGER.info("The plane " + getVehicleName() + " has taken off!");
             setMoving(true);
         } else {
-            LOGGER.warning("The plane " + getVehicleName() + " is already flying!");
+            LOGGER.info("The plane " + getVehicleName() + " is already flying!");
         }
 
     }
@@ -44,13 +45,13 @@ public class WarPlane extends Vehicle {
             setMoving(false);
             LOGGER.info("The plane " + getVehicleName() + " has landed");
         } else {
-            LOGGER.warning("The plane " + getVehicleName() + " isn't flying.");
+            LOGGER.info("The plane " + getVehicleName() + " isn't flying.");
         }
     }
 
     @Override
     public String toString() {
-        return super.toString() + "WarPlane{" +
+        return super.toString() + " WarPlane{" +
                 "isFlying=" + isFlying +
                 ", loaded=" + loaded +
                 '}';

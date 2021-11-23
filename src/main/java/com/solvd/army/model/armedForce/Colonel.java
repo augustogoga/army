@@ -1,11 +1,12 @@
 package com.solvd.army.model.armedForce;
 
-import java.util.logging.Logger;
+import com.solvd.army.model.stock.Weapon;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Colonel extends Soldier {
-    public static final Logger LOGGER = Logger.getLogger(Colonel.class.getName());
-    private String weapon;
-    private int accessLevel;
+    private static final Logger LOGGER = LogManager.getLogger(Colonel.class);
+    private static final int accessLevel = 20;
     private boolean readyToShoot;
 
     public Colonel(String name, int soldierId) {
@@ -13,20 +14,8 @@ public class Colonel extends Soldier {
     }
 
 
-    public String getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(String weapon) {
-        this.weapon = weapon;
-    }
-
     public int getAccessLevel() {
         return accessLevel;
-    }
-
-    public void setAccessLevel(int accessLevel) {
-        this.accessLevel = accessLevel;
     }
 
     public boolean isReadyToShoot() {
@@ -39,8 +28,7 @@ public class Colonel extends Soldier {
 
     @Override
     public String toString() {
-        return super.toString() + "Private{" +
-                "weapon='" + weapon + '\'' +
+        return super.toString() + "Private{" + '\'' +
                 ", accessLevel=" + accessLevel +
                 ", readyToShoot=" + readyToShoot +
                 '}';

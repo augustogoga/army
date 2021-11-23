@@ -1,12 +1,13 @@
 package com.solvd.army.model.machinery;
 
-import com.solvd.army.model.interfaces.IReload;
-import com.solvd.army.model.interfaces.IShoot;
+import com.solvd.army.model.interfaces.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
-import java.util.logging.Logger;
+import java.util.Objects;
 
 public abstract class Vehicle implements IShoot, IReload {
-    public static final Logger LOGGER = Logger.getLogger(Vehicle.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(Vehicle.class.getName());
     private String plate;
     private String vehicleName;
     private boolean isMoving = false;
@@ -36,6 +37,7 @@ public abstract class Vehicle implements IShoot, IReload {
         }
     }
 
+    @Override
     public void shoot() {
         int i = 0;
         int ammo = getAmmo();
@@ -45,6 +47,7 @@ public abstract class Vehicle implements IShoot, IReload {
         }
     }
 
+    @Override
     public void reload() {
         ammo = getAmmo();
         if (ammo == 10) {
@@ -53,6 +56,7 @@ public abstract class Vehicle implements IShoot, IReload {
             setAmmo(10);
         }
     }
+
 
     public int getPowerLevel() {
         return powerLevel;
@@ -91,5 +95,18 @@ public abstract class Vehicle implements IShoot, IReload {
         return "Vehicle: " +
                 "plate='" + plate + '\'' +
                 ", vehicleName='" + vehicleName + '\'' + ", powerLevel= " + powerLevel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehicle)) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return isMoving == vehicle.isMoving && ammo == vehicle.ammo && powerLevel == vehicle.powerLevel && Objects.equals(plate, vehicle.plate) && Objects.equals(vehicleName, vehicle.vehicleName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(plate, vehicleName, isMoving, ammo, powerLevel);
     }
 }

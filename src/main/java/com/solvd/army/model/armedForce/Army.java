@@ -6,10 +6,13 @@ import com.solvd.army.model.exceptions.VehicleNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Objects;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Army {
-    public static final Logger LOGGER = Logger.getLogger(Army.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(Army.class);
     private String name;
     private int squadAmount;
     private List<Squad> squads;
@@ -19,6 +22,7 @@ public class Army {
         this.squadAmount = squadAmount;
         this.squads = new ArrayList<>();
     }
+
 
     public Army(String name, int squadAmount, ArrayList<Squad> squads) {
         this.name = name;
@@ -69,6 +73,18 @@ public class Army {
         this.name = name;
     }
 
+    public int getSquadAmount() {
+        return squadAmount;
+    }
+
+    public void setSquadAmount(int squadAmount) {
+        this.squadAmount = squadAmount;
+    }
+
+    public void setSquads(List<Squad> squads) {
+        this.squads = squads;
+    }
+
     @Override
     public String toString() {
         return "----ARMY----" + "\n" +
@@ -78,14 +94,30 @@ public class Army {
     }
 
     public void fight(Army army1, Army army2) {
-        int power1 = army1.getSquads().get(0).getSquadPower();
-        int power2 = army2.getSquads().get(0).getSquadPower();
-        String message = "The army " + army2.getName() + " has won the fight!";
+        if (army1.equals(army2)) {
+            LOGGER.info("You can't make two equal armies fight");
+        } else {
+            int power1 = army1.getSquads().get(0).getSquadPower();
+            int power2 = army2.getSquads().get(0).getSquadPower();
+            String message = "The army " + army2.getName() + " has won the fight!";
 
-        if (power1 >= power2) {
-            message = "The army " + army1.getName() + " has won the fight!";
+            if (power1 >= power2) {
+                message = "The army " + army1.getName() + " has won the fight!";
+            }
+            LOGGER.info(message);
         }
-        LOGGER.info(message);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Army army = (Army) o;
+        return squadAmount == army.squadAmount && Objects.equals(name, army.name) && Objects.equals(squads, army.squads);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, squadAmount, squads);
+    }
 }

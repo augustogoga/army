@@ -5,8 +5,12 @@ import com.solvd.army.model.exceptions.SoldierNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Squad {
+    private static final Logger LOGGER = LogManager.getLogger(Squad.class);
     private String squadName;
     private int squadId;
     private List<Soldier> soldiers;
@@ -15,8 +19,8 @@ public class Squad {
     public Squad(String squadName, int squadId) {
         this.squadName = squadName;
         this.squadId = squadId;
-        this.soldiers = new ArrayList<Soldier>();
-        this.vehicles = new ArrayList<Vehicle>();
+        this.soldiers = new ArrayList<>();
+        this.vehicles = new ArrayList<>();
     }
 
     public void addSoldier(Soldier soldier) {
@@ -60,21 +64,40 @@ public class Squad {
         throw new SoldierNotFoundException("No soldier found with that ID.");
     }
 
-
     public int getSquadPower() {
         int soldierPower = 0;
         int vehiclesPower = 0;
+        int weaponsPower = 0;
         for (Soldier soldier : this.soldiers) {
             soldierPower += soldier.getPowerLevel();
         }
-
         for (Vehicle vehicle : this.vehicles) {
             vehiclesPower += vehicle.getPowerLevel();
         }
-
-        return vehiclesPower + soldierPower;
+        for (Soldier soldier : this.soldiers) {
+            if (soldier.getWeapon() != null){
+                weaponsPower += soldier.getWeapon().getPowerLevel();
+            }
+        }
+        return (vehiclesPower + soldierPower + weaponsPower);
     }
 
+
+    public String getSquadName() {
+        return squadName;
+    }
+
+    public void setSquadName(String squadName) {
+        this.squadName = squadName;
+    }
+
+    public void setSquadId(int squadId) {
+        this.squadId = squadId;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
 
     @Override
     public String toString() {
@@ -83,5 +106,18 @@ public class Squad {
                 "ID=" + squadId + "\n" + "----SOLDIERS----" + "\n" +
                 soldiers + "\n" + "----SOLDIERS END----" + "\n" +
                 "----VEHICLES----" + "\n" + vehicles + "\n" + "----TOTAL POWER LEVEL----" + "\n" + getSquadPower() + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Squad)) return false;
+        Squad squad = (Squad) o;
+        return squadId == squad.squadId && squadName.equals(squad.squadName) && soldiers.equals(squad.soldiers) && vehicles.equals(squad.vehicles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(squadName, squadId, soldiers, vehicles);
     }
 }
